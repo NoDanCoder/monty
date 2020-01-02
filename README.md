@@ -25,7 +25,7 @@ of the language. There is not more than one instruction per line. There can be
 any number of spaces before or after the opcode and its argument:
 
 ```
-vagrant$ cat -e bytecodes/000.m
+vagrant > cat -e bytecodes/000.m
 push 0$
 push 1$
 push 2$
@@ -35,14 +35,14 @@ push 4$
     push 5    $
       push    6        $
 pall$
-vagrant$
+vagrant >
 ```
 
 Monty byte code files can contain blank lines (empty or made of spaces only,
 and any additional text after the opcode or its required argument is not taken into account:
 
 ```
-vagrant$ cat -e bytecodes/001.m
+vagrant > cat -e bytecodes/001.m
 push 0 Push 0 onto the stack$
 push 1 Push 1 onto the stack$
 $
@@ -58,16 +58,17 @@ $
       push    6        $
 $
 pall This is the end of our program. Monty is awesome!$
-vagrant$
+vagrant >
 ```
 
 ### The monty program
 
- + Usage: *monty file*
-    - where *file* is the path to the file containing Monty byte code
+ + Usage: **monty file**
+   - where **file** is the path to the file containing Monty byte code
  + If the user does not give any file or more than one argument to your program,
-print the error message *USAGE: monty file*, followed by a new line, and exit with the
-status *EXIT_FAILURE*
- + If, for any reason, it’s not possible to open the file, print the error message *Error: Can't
-open file <file>*, followed by a new line, and exit with the status *EXIT_FAILURE*
-    - where *<file>* is the name of the file
+print the error message **USAGE: monty file**, followed by a new line, and exit with the
+status **EXIT_FAILURE**
+ + If, for any reason, it’s not possible to open the file, print the error message **Error: Can't
+open file <file>**, followed by a new line, and exit with the status **EXIT_FAILURE**
+   - where **<file>** is the name of the file
+ + 
