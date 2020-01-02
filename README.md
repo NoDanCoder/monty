@@ -41,7 +41,7 @@ pall$
 Monty byte code files can contain blank lines (empty or made of spaces only,
 and any additional text after the opcode or its required argument is not taken into account:
 
-</pre></code>
+<pre><code>
 <b>vagrant:></b> cat -e bytecodes/001.m
 push 0 Push 0 onto the stack$
 push 1 Push 1 onto the stack$
