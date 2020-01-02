@@ -1,6 +1,6 @@
-#Monty
+# Monty
 
-##General
+## General
 
  - What do LIFO and FIFO mean  
  - What is a stack, and when to use it  
@@ -10,14 +10,14 @@
  - What is the proper way to use global variables  
  - How to work with git submodules  
 
-##The Monty language
+## The Monty language
 
 Monty 0.98 is a scripting language that is first compiled into Monty
 byte codes (Just like Python). It relies on a unique stack, with specific
 instructions to manipulate it. The goal of this project is to create an
 interpreter for Monty ByteCodes files.
 
-###Monty byte code files
+### Monty byte code files
 
 Files containing Monty byte codes usually have the *.m* extension. Most of
 the industry uses this standard but it is not required by the specification
@@ -41,7 +41,7 @@ vagrant$
 Monty byte code files can contain blank lines (empty or made of spaces only,
 and any additional text after the opcode or its required argument is not taken into account:
 
-``` 
+```
 vagrant$ cat -e bytecodes/001.m
 push 0 Push 0 onto the stack$
 push 1 Push 1 onto the stack$
@@ -61,7 +61,7 @@ pall This is the end of our program. Monty is awesome!$
 vagrant$
 ```
 
-###The monty program
+### The monty program
 
  + Usage: *monty file*
     - where *file* is the path to the file containing Monty byte code
