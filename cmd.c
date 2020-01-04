@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 #include "monty.h"
 
 #define IGNORE (void)
@@ -17,7 +18,16 @@ void push(stack_t **stack, unsigned int line_number)
 		free(pack.cmd), error("Error: malloc failed", 0, 1);
 	}
 
+	/**
+	 * important understand what below line does it mean
+	 * because this function calls strtok to get the 
+	 * int peremeter, it trusty that you called in the past the strtok
+	 * of the buffer that will search the value, almost ever is from
+	 * "pack.cmd", but for example when "add" function calls it, it
+	 * it operate from the buffer that "add" gererate
+	 */
 	value = strtok(NULL, " \n");
+
 	if (value && isNumber(value))
 		add->n = atoi(value);
 	else
@@ -78,4 +88,69 @@ void pop(stack_t **stack, unsigned int line_number)
 		dprintf(2, "L%d: can't pop an empty stack", line_number);
 		error("", 0, 1);
 	}
+}
+
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current = *stack;
+
+	if (*stack && (*stack)->next)
+	{
+		*stack = current->next;
+		current->next = (*stack)->next;
+		current->prev = *stack;
+		(*stack)->prev = NULL;
+		(*stack)->next = current;
+		if (current->next)
+			(current->next)->prev = current;
+	}
+	else
+	{
+		freeStack(stack);
+		free(pack.cmd);
+		dprintf(2, "L%d: can't swap, stack too short", line_number);
+		error("", 0, 1);
+	}
+}
+
+
+void add(stack_t **stack, unsigned int line_number)
+{
+	int result = 0;
+	stack_t *current = *stack;
+	char buffer[256];
+
+	if (current && current->next)
+	{
+		result = current->n + (current->next)->n;
+
+		pop(stack, pack.n);
+		pop(stack, pack.n);
+
+		bzero(buffer, 256);
+		sprintf(buffer, "push %d", result);
+
+		/* important understand what below line does it mean
+		 * because "push" function calls strtok(NULL, " \n")
+		 * to get the integer value from "buffer"
+		 */
+		strtok(buffer, " \n"); 
+
+		push(stack, pack.n);
+	}
+	else
+	{
+		freeStack(stack);
+		free(pack.cmd);
+		dprintf(2, "L%d: can't swap, stack too short", line_number);
+		error("", 0, 1);
+	}
+}
+
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+	IGNORE stack;
+	IGNORE line_number;
+	return;
 }

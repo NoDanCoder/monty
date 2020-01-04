@@ -37,6 +37,7 @@ typedef struct instruction_s
  * struct pack - transport getline and line_number
  * @cmd: current line in operation
  * @n: current line number
+ * @fdcode: to close globally the opened file
  *
  * Description: whole line in manipulation and his
  * position
@@ -54,8 +55,12 @@ void push(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 void error(char *str, int shouldFree, int closeFile);
 char *str_concat(char *s1, char *s2);
 void built_in(stack_t **head);
+int numOfDigits(double number);
 
 #endif /* _MONTY_H */
