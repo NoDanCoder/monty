@@ -6,6 +6,17 @@
 
 #define IGNORE (void)
 
+/**
+ * push - The opcode push pushes an element at the top
+ * of the stack
+ * @stack: stack where this function will operate
+ * @line_number: on error case, to print out the info
+ *
+ *
+ * Return: nothing
+ * On error: it frees some buffers and exit the program
+ * with EXIT_FAILURE
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *add, *current = *stack;
@@ -20,7 +31,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	/**
 	 * important understand what below line does it mean
-	 * because this function calls strtok to get the 
+	 * because this function calls strtok to get the
 	 * int peremeter, it trusty that you called in the past the strtok
 	 * of the buffer that will search the value, almost ever is from
 	 * "pack.cmd", but for example when "add" function calls it, it
@@ -47,6 +58,17 @@ void push(stack_t **stack, unsigned int line_number)
 	add->prev = NULL;
 }
 
+/**
+ * pall - The opcode pall prints all the values on the stack,
+ * starting from the top of the stack.
+ * @stack: stack where this function will operate
+ * @line_number: on error case, to print out the info
+ *
+ *
+ * Return: nothing
+ * On error: it frees some buffers and exit the program
+ * with EXIT_FAILURE
+ */
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
@@ -56,6 +78,17 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", current->n);
 }
 
+/**
+ * pint - The opcode pint prints the value at the top of the
+ * stack, followed by a new line.
+ * @stack: stack where this function will operate
+ * @line_number: on error case, to print out the info
+ *
+ *
+ * Return: nothing
+ * On error: it frees some buffers and exit the program
+ * with EXIT_FAILURE
+ */
 void pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack)
@@ -69,7 +102,16 @@ void pint(stack_t **stack, unsigned int line_number)
 	}
 }
 
-
+/**
+ * pop - The opcode pop removes the top element of the stack.
+ * @stack: stack where this function will operate
+ * @line_number: on error case, to print out the info
+ *
+ *
+ * Return: nothing
+ * On error: it frees some buffers and exit the program
+ * with EXIT_FAILURE
+ */
 void pop(stack_t **stack, unsigned int line_number)
 {
 	if (*stack && (*stack)->next)
@@ -90,6 +132,17 @@ void pop(stack_t **stack, unsigned int line_number)
 	}
 }
 
+
+/**
+ * swap - The opcode swap swaps the top two elements of the stack.
+ * @stack: stack where this function will operate
+ * @line_number: on error case, to print out the info
+ *
+ *
+ * Return: nothing
+ * On error: it frees some buffers and exit the program
+ * with EXIT_FAILURE
+ */
 void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
@@ -111,46 +164,4 @@ void swap(stack_t **stack, unsigned int line_number)
 		dprintf(2, "L%d: can't swap, stack too short", line_number);
 		error("", 0, 1);
 	}
-}
-
-
-void add(stack_t **stack, unsigned int line_number)
-{
-	int result = 0;
-	stack_t *current = *stack;
-	char buffer[256];
-
-	if (current && current->next)
-	{
-		result = current->n + (current->next)->n;
-
-		pop(stack, pack.n);
-		pop(stack, pack.n);
-
-		bzero(buffer, 256);
-		sprintf(buffer, "push %d", result);
-
-		/* important understand what below line does it mean
-		 * because "push" function calls strtok(NULL, " \n")
-		 * to get the integer value from "buffer"
-		 */
-		strtok(buffer, " \n"); 
-
-		push(stack, pack.n);
-	}
-	else
-	{
-		freeStack(stack);
-		free(pack.cmd);
-		dprintf(2, "L%d: can't swap, stack too short", line_number);
-		error("", 0, 1);
-	}
-}
-
-
-void nop(stack_t **stack, unsigned int line_number)
-{
-	IGNORE stack;
-	IGNORE line_number;
-	return;
 }

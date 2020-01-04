@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include "monty.h"
 
+/**
+ * main - get av[1], open it, get every command, execute it,
+ * free some buffers, close file and exit (monty interpreter)
+ * @ac: count of argument given
+ * @av: array of given arguments
+ *
+ *
+ * Return: EXIT_SUCCESS
+ * On error: EXIT_FAILURE
+ */
 int main(int ac, char *av[])
 {
 	FILE *montyfd;

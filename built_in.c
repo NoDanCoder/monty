@@ -4,7 +4,9 @@
 #include "monty.h"
 
 /**
- * built_in - checks if cmd is a built in
+ * built_in - checks if cmd is a command function
+ * and calls his respective function to habdle
+ * the stack_t
  * @head: stack to operate with cmd
  *
  * Return: On fail 0
