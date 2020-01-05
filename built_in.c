@@ -20,13 +20,17 @@ void built_in(stack_t **head)
 		{"pop", pop},
 		{"swap", swap},
 		{"add", add},
-		{"nop", nop}
+		{"nop", nop},
+		{"sub", sub},
+		{"div", divs},
+		{"mul", mul},
+		{"mod", mod}
 	};
 
 	int i = sizeof(ops) / sizeof(ops[0]); /* lenght of ops array */
-	char *buffer = strtok(pack.cmd, " \n");
+	char *buffer = strtok(pack.cmd, " \n\t");
 
-	if (buffer == NULL)
+	if (buffer == NULL || *buffer == '#')
 		return;
 
 	while (i--)

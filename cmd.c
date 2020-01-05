@@ -37,7 +37,7 @@ void push(stack_t **stack, unsigned int line_number)
 	 * "pack.cmd", but for example when "add" function calls it, it
 	 * it operate from the buffer that "add" gererate
 	 */
-	value = strtok(NULL, " \n");
+	value = strtok(NULL, " \n\t");
 
 	if (value && isNumber(value))
 		add->n = atoi(value);
