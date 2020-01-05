@@ -19,28 +19,12 @@
  */
 void add(stack_t **stack, unsigned int line_number)
 {
-	int result = 0;
 	stack_t *current = *stack;
-	char buffer[256];
 
 	if (current && current->next)
 	{
-		result = current->n + (current->next)->n;
-
+		(current->next)->n = current->n + (current->next)->n;
 		pop(stack, pack.n);
-		pop(stack, pack.n);
-
-		bzero(buffer, 256);
-		sprintf(buffer, "push %d", result);
-
-		/**
-		 * important understand what below line does it mean
-		 * because "push" function calls strtok(NULL, " \n")
-		 * to get the integer value from "buffer"
-		 */
-		strtok(buffer, " \n\t");
-
-		push(stack, pack.n);
 	}
 	else
 	{

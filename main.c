@@ -18,7 +18,7 @@ int main(int ac, char *av[])
 	size_t buffSize = 0;
 	stack_t *head = NULL;
 
-	pack.cmd = NULL, pack.n = 1;
+	pack.cmd = NULL, pack.n = 1, pack.mode = 0;
 
 	if (ac != 2 || av == NULL)
 		error("USAGE: monty file", 0, 0);

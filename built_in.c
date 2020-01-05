@@ -14,17 +14,15 @@
 void built_in(stack_t **head)
 {
 	instruction_t ops[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{"sub", sub},
-		{"div", divs},
-		{"mul", mul},
-		{"mod", mod}
+		{"push", push}, {"pall", pall},
+		{"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add},
+		{"nop", nop}, {"sub", sub},
+		{"div", divs}, {"mul", mul},
+		{"mod", mod}, {"pchar", pchar},
+		{"pstr", pstr}, {"rotl", rotl},
+		{"rotr", rotr}, {"queue", queue},
+		{"stack", stack}
 	};
 
 	int i = sizeof(ops) / sizeof(ops[0]); /* lenght of ops array */

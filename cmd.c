@@ -25,37 +25,40 @@ void push(stack_t **stack, unsigned int line_number)
 	add = malloc(sizeof(stack_t));
 	if (!add)
 	{
-		freeStack(stack);
-		free(pack.cmd), error("Error: malloc failed", 0, 1);
+		freeStack(stack), free(pack.cmd);
+		error("Error: malloc failed", 0, 1);
 	}
-
-	/**
-	 * important understand what below line does it mean
-	 * because this function calls strtok to get the
-	 * int peremeter, it trusty that you called in the past the strtok
-	 * of the buffer that will search the value, almost ever is from
-	 * "pack.cmd", but for example when "add" function calls it, it
-	 * it operate from the buffer that "add" gererate
-	 */
-	value = strtok(NULL, " \n\t");
+	value = strtok(NULL, " \n\t"); /* read next parameter from pack.cmd */
 
 	if (value && isNumber(value))
 		add->n = atoi(value);
 	else
 	{
 		dprintf(2, "L%d: usage: push integer\n", line_number);
-		free(add), free(pack.cmd);
-		freeStack(stack);
-		fclose(pack.fdcode);
-		exit(EXIT_FAILURE);
+		free(add), free(pack.cmd), freeStack(stack);
+		fclose(pack.fdcode), exit(EXIT_FAILURE);
 	}
 
-	if (current)
-		current->prev = add;
+	if (pack.mode == 0)
+	{
+		if (current)
+			current->prev = add;
+		*stack = add;
+		add->next = current;
+		add->prev = NULL;
+	}
+	else
+	{
+		while (current && current->next)
+			current = current->next;
 
-	*stack = add;
-	add->next = current;
-	add->prev = NULL;
+		if (current)
+			current->next = add;
+		else
+			*stack = add;
+		add->prev = current;
+		add->next = NULL;
+	}
 }
 
 /**

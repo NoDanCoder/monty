@@ -38,6 +38,7 @@ typedef struct instruction_s
  * @cmd: current line in operation
  * @n: current line number
  * @fdcode: to close globally the opened file
+ * @mode: 0 stack, 1 queue
  *
  * Description: whole line in manipulation and his
  * position
@@ -47,6 +48,7 @@ struct pack
 	char *cmd;
 	unsigned int n;
 	FILE *fdcode;
+	int mode;
 } pack;
 
 void freeStack(stack_t **stack);
@@ -61,7 +63,13 @@ void sub(stack_t **stack, unsigned int line_number);
 void divs(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
 void error(char *str, int shouldFree, int closeFile);
 char *str_concat(char *s1, char *s2);
 void built_in(stack_t **head);
