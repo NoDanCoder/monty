@@ -25,7 +25,10 @@ int main(int ac, char *av[])
 
 	montyfd = fopen(av[1], "r");
 	if (!montyfd)
-		error(str_concat("Error: Can't open file ", av[1]), 1, 0);
+	{
+		dprintf(2, "Error: Can't open file %s", av[1]);
+		error("", 0, 0);
+	}
 	pack.fdcode = montyfd;
 
 	while (-1 != getline(&pack.cmd, &buffSize, montyfd))
