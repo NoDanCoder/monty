@@ -32,7 +32,7 @@ void mod(stack_t **stack, unsigned int line_number)
 		return;
 	}
 
-	if (current->n == 0)
+	if (current && current->n == 0)
 		msg = "L%d: division by zero";
 	else
 		msg = "L%d: can't mod, stack too short";
